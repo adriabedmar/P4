@@ -1,0 +1,8 @@
+[options]
+prefix = /home/adria/PAV
+libdir = lib
+buildtype = release
+backend = ninja
+
+[properties]
+

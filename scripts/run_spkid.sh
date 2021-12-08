@@ -15,7 +15,7 @@
 lists=lists
 w=work
 name_exp=one
-db=spk_8mu/speecon
+db=spk_8mu/spk_8mu/speecon
 
 # ------------------------
 # Usage
@@ -29,7 +29,7 @@ if [[ $# < 1 ]]; then
    echo "      FEAT: where FEAT is the name of a feature (eg. lp, lpcc or mfcc)."
    echo "            - A function with the name compute_FEAT() must be defined."
    echo "            - Initially, only compute_lp() exists and can be used."
-   echo "            - Edit this file to add your own features."
+   echo "            - The different possibilities are compute_lp(), compute_lpcc() and compute_mfcc()"
    echo ""
    echo "     train: train GMM for speaker recognition and/or verification"
    echo "      test: test GMM in speaker recognition"
@@ -86,13 +86,26 @@ fi
 # - Select (or change) different features, options, etc. Make you best choice and try several options.
 
 compute_lp() {
-    for filename in $(cat $lists/class/all.train $lists/class/all.test); do
+    for filename in $(sort $lists/class/all.train $lists/class/all.test); do
         mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
         EXEC="wav2lp 8 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
         echo $EXEC && $EXEC || exit 1
     done
 }
-
+compute_lpcc() {
+    for filename in $(sort $lists/class/all.train $lists/class/all.test); do
+        mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
+        EXEC="wav2lpcc 9 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        echo $EXEC && $EXEC || exit 1
+    done
+}
+compute_mfcc() {
+    for filename in $(sort $lists/class/all.train $lists/class/all.test); do
+        mkdir -p `dirname $w/$FEAT/$filename.$FEAT`
+        EXEC="wav2mfcc 13 $db/$filename.wav $w/$FEAT/$filename.$FEAT"
+        echo $EXEC && $EXEC || exit 1
+    done
+}
 
 #  Set the name of the feature (not needed for feature extraction itself)
 if [[ ! -n "$FEAT" && $# > 0 && "$(type -t compute_$1)" = function ]]; then
@@ -118,11 +131,13 @@ for cmd in $*; do
    if [[ $cmd == train ]]; then
        ## @file
 	   # \TODO
+       # \HECHO
+       # Values: -v 1 -m 50 -T 1e-6 -N 30
 	   # Select (or change) good parameters for gmm_train
        for dir in $db/BLOCK*/SES* ; do
            name=${dir/*\/}
            echo $name ----
-           gmm_train  -v 1 -T 0.001 -N5 -m 1 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train || exit 1
+           gmm_train  -v 1 -m 50 -T 1e-6 -N 30 -d $w/$FEAT -e $FEAT -g $w/gmm/$FEAT/$name.gmm $lists/class/$name.train || exit 1
            echo
        done
    elif [[ $cmd == test ]]; then

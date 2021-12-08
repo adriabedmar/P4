@@ -1,0 +1,10 @@
+# List of files installed by Meson
+# Does not contain files installed by custom scripts.
+/home/adria/PAV/lib/libpav.a
+/home/adria/PAV/bin/gmm_classify
+/home/adria/PAV/bin/gmm_show
+/home/adria/PAV/bin/gmm_train
+/home/adria/PAV/bin/gmm_verify
+/home/adria/PAV/bin/pearson
+/home/adria/PAV/bin/fmatrix_cut
+/home/adria/PAV/bin/fmatrix_show

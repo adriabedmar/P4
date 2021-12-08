@@ -13,7 +13,7 @@ trap cleanup EXIT
 cleanup() {
    \rm -f $base.*
 }
-
+# Checking the number of arguments
 if [[ $# != 3 ]]; then
    echo "$0 lpc_order input.wav output.lp"
    exit 1
