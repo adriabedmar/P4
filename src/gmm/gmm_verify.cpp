@@ -45,9 +45,8 @@ float verify(const GMM &gmm_candidate, const GMM & gmm_world, const fmatrix &dat
   //HECHO
   lprobcand = gmm_candidate.logprob(dat);
   lprobbackground = gmm_world.logprob(dat);
-  float score = lprobcand-lprobbackground;
-
-  return score;
+ 
+  return lprobcand - lprobbackground;
 
 }
 

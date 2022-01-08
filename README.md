@@ -169,11 +169,18 @@ Complete el código necesario para entrenar modelos GMM.
 
 - Inserte una gráfica que muestre la función de densidad de probabilidad modelada por el GMM de un locutor
   para sus dos primeros coeficientes de MFCC.
-
+  ![Visualización GMM sesión 001](./img/mfcc_gmm_visual_001.png)
   
 - Inserte una gráfica que permita comparar los modelos y poblaciones de dos locutores distintos (la gŕafica
   de la página 20 del enunciado puede servirle de referencia del resultado deseado). Analice la capacidad
   del modelado GMM para diferenciar las señales de uno y otro.
+  ![Visualización GMM sesión 001 poblacion 001](./img/mfcc_gmm_ses001_001.png)
+
+  ![Visualización GMM sesión 001 poblacion 005](./img/mfcc_gmm_ses001_005.png)
+
+  ![Visualización GMM sesión 005 poblacion 005](./img/mfcc_gmm_ses005_005.png)
+
+  ![Visualización GMM sesión 005 poblacion 001](./img/mfcc_gmm_ses005_001.png)
 
 ### Reconocimiento del locutor.
 
@@ -186,7 +193,7 @@ Complete el código necesario para realizar reconociminto del locutor y optimice
   | Tasa de Error | 40.76% | 13.76% | 4.97% |    1    |
   | Tasa de Error | 11.46% | 2.29%  | 1.02% |    2    |
 
-  Para la versión mejorada el entrenamiento se ha hecho con 50 gaussianas y se ha aumentado el número de iteraciones (30) para hacer el calculo de EM así como se ha reducido el threshold (1e-6), aunque no se ha llegado al límite antes de las 30 iteraciones.
+  Para la versión mejorada el entrenamiento se ha hecho con 50 gaussianas y se ha aumentado el número de iteraciones (30) para hacer el calculo de EM así como se ha reducido el threshold (1e-4), aunque no se ha llegado al límite antes de las 30 iteraciones.
 
 ### Verificación del locutor.
 
@@ -196,10 +203,16 @@ Complete el código necesario para realizar verificación del locutor y optimice
   de verificación de SPEECON. La tabla debe incluir el umbral óptimo, el número de falsas alarmas y de
   pérdidas, y el score obtenido usando la parametrización que mejor resultado le hubiera dado en la tarea
   de reconocimiento.
- 
+
+  Usando MFCC se obtiene el siguiente resultado:
+
+  |          |   Umbral   |  Falsas alarmas  |  Perdidas | Coste detección |
+  |----------|:----------:|:----------------:|:---------:|:---------------:|
+  |   MFCC   |   0.2359   |       3/1000     |   14/250  |      8.3        |
+  
 ### Test final
 
-- Adjunte, en el repositorio de la práctica, los ficheros `class_test.log` y `verif_test.log` 
+- Adjunte, en el repositorio de la práctica, los ficheros `class_test.log` y `verif_final.log` 
   correspondientes a la evaluación *ciega* final.
 
 ### Trabajo de ampliación.
